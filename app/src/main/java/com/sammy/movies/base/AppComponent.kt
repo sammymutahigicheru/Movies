@@ -1,6 +1,7 @@
 package com.sammy.movies.base
 
 import android.app.Application
+import com.sammy.datasource.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -12,7 +13,8 @@ import javax.inject.Singleton
 @Component(
     modules = [
     AndroidSupportInjectionModule::class,
-    AppModule::class
+    AppModule::class,
+    NetworkModule::class
     ]
 )
 interface AppComponent:AndroidInjector<DaggerApplication> {
