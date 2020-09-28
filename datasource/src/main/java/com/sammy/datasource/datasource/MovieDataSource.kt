@@ -8,6 +8,8 @@ import com.sammy.datasource.api.MoviesApi
 import com.sammy.datasource.cache.movies.Movie
 import com.sammy.datasource.cache.movies.MoviePersist
 import com.sammy.datasource.cache.movies.MoviesResponse
+import com.sammy.datasource.utils.API_KEY
+import com.sammy.datasource.utils.LANGUAGE
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -21,9 +23,9 @@ class MovieDataSource @Inject constructor(
 ) {
 
 
-    fun getMovies(listener: Listener<MoviesResponse>): LiveData<MoviesResponse> {
+    fun getMovies(page:Int,sortBy:String,listener: Listener<MoviesResponse>): LiveData<MoviesResponse> {
 
-        networkClient.getRetrofitService(MoviesApi::class.java).getPopularMovies("", "", 0)
+        networkClient.getRetrofitService(MoviesApi::class.java).getPopularMovies(API_KEY, LANGUAGE, page)
             .enqueue(object : Callback<MoviesResponse> {
                 override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
                     Log.d("response_posts", t.message!!)
