@@ -12,5 +12,5 @@ interface MovieDao {
     fun save(movies: MoviesResponse)
 
     @Query("SELECT * FROM moviesresponse")
-    fun load(): LiveData<List<Movie>>
+    fun load(): LiveData<MoviesResponse>
 }

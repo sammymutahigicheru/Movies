@@ -9,17 +9,17 @@ import com.sammy.datasource.cache.genre.Genre
 import com.sammy.datasource.cache.genre.GenreDao
 import javax.inject.Inject
 
-class MoviePersist @Inject constructor(val context: Context) :
-    CacheInterface<Movie> {
+class MoviePersist @Inject constructor(context: Context) :
+    CacheInterface<MoviesResponse> {
 
     private var movieDao: MovieDao = MainDatabase.getDatabase(context).movieDao()
 
     @WorkerThread
-    override suspend fun save(items: List<Movie>) {
+    override suspend fun save(items: MoviesResponse) {
         movieDao.save(items)
     }
 
-    override  fun load(): LiveData<List<Movie>> {
+    override  fun load(): LiveData<MoviesResponse> {
         return movieDao.load()
     }
 
