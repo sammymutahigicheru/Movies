@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_movies" app:startDestination="@id/moviesListFragment"
+    >
+    <fragment android:id="@+id/moviesListFragment"
+        android:name="com.sammy.movies.MoviesFragment"
+        tools:layout="@layout/fragment_movies"
+        android:label="MoviesListFragment">
+        <deepLink app:uri="@string/movies_list_uri" />
+    </fragment>
+
+</navigation>

@@ -1,6 +1,6 @@
 package com.sammy.movies.base
 
-import com.sammy.movies.MainActivity
+import com.sammy.movies.main.MainActivity
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
 

@@ -1,8 +1,7 @@
-package com.sammy.movies
+package com.sammy.movies.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import dagger.android.DaggerActivity
+import com.sammy.movies.R
 import dagger.android.support.DaggerAppCompatActivity
 
 class MainActivity : DaggerAppCompatActivity() {
