@@ -9,8 +9,8 @@ import androidx.room.Query
 @Dao
 interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(genres: List<Movie>)
+    fun save(movies: MoviesResponse)
 
-    @Query("SELECT * FROM movie")
+    @Query("SELECT * FROM moviesresponse")
     fun load(): LiveData<List<Movie>>
 }
