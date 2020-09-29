@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -32,14 +32,18 @@ class MoviesFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movies, container, false)
+        val view = inflater.inflate(R.layout.fragment_movies, container, false)
+        val toolbar: Toolbar = view.findViewById(R.id.toolbar)
+        activity!!.setActionBar(toolbar)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initViewModel()
         initObservers()
-        getData(5, POPULAR)
+        getData(1, POPULAR)
     }
     private fun getData(page:Int,sortBy:String) {
         moviesViewModel.getMovies(page,sortBy).observe(this, Observer {
@@ -67,7 +71,7 @@ class MoviesFragment : DaggerFragment() {
     }
 
     private fun initRecyclerView(movies: MoviesResponse) {
-        adapter = MoviesRVAdapter(movies)
+        adapter = MoviesRVAdapter(context!!,movies)
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         movies_list.layoutManager = layoutManager
         movies_list.adapter = adapter

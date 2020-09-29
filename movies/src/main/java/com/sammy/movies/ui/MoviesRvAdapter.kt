@@ -1,18 +1,18 @@
 package com.sammy.movies.ui
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.sammy.datasource.cache.movies.MoviesResponse
 import com.sammy.movies.R
-import com.sammy.movies.utils.IMAGE_BASE_URL
+import com.squareup.picasso.Picasso
 
 class MoviesRVAdapter(
+    val context: Context,
     val movies: MoviesResponse
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -27,13 +27,15 @@ class MoviesRVAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ItemViewHolder).releaseDate.text = movies.movies[position].releaseDate
+        (holder as ItemViewHolder).releaseDate.text =
+            movies.movies[position].releaseDate.split("-")[0]
         holder.title.text = movies.movies[position].title
-       // holder.rating.text = movies.movies[position].rating.toString()
-        Glide.with(holder.poster.context)
-            .load(IMAGE_BASE_URL + movies.movies[position].posterPath)
-            .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
+        holder.rating.text = movies.movies[position].rating.toString()
+
+
+        Picasso.get().load("https://image.tmdb.org/t/p/w500${movies.movies[position].posterPath}")
             .into(holder.poster)
+
 
     }
 
@@ -51,24 +53,19 @@ class MoviesRVAdapter(
             LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
         return MovieViewHolder(view)
     }
-
     fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(movies[position])
     }
-
     val itemCount: Int
         get() = movies.size
-
     fun appendMovies(moviesToAppend: List<Movie>?) {
         movies.addAll(moviesToAppend!!)
         notifyDataSetChanged()
     }
-
     fun clearMovies() {
         movies.clear()
         notifyDataSetChanged()
     }
-
     inner class MovieViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var releaseDate: TextView
@@ -88,7 +85,6 @@ class MoviesRVAdapter(
                 .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
                 .into(poster)
         }
-
         private fun getGenres(genreIds: List<Int>): String {
             val movieGenres: MutableList<String?> =
                 ArrayList()
@@ -102,7 +98,6 @@ class MoviesRVAdapter(
             }
             return TextUtils.join(", ", movieGenres)
         }
-
         init {
             releaseDate = itemView.findViewById(R.id.item_movie_release_date)
             title = itemView.findViewById(R.id.item_movie_title)
