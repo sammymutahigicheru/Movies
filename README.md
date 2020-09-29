@@ -1,7 +1,7 @@
 # Movies
 [![CodeFactor](https://www.codefactor.io/repository/github/sammymutahigicheru/Movies/badge)](https://www.codefactor.io/repository/github/sammymutahigicheru/Movies) [![CircleCI](https://circleci.com/gh/sammymutahigicheru/Movies/tree/master.svg?style=svg)](https://circleci.com/gh/sammymutahigicheru/sammymutahigicheru/tree/master) [![codecov](https://codecov.io/gh/sammymutahigicheru/Movies/branch/master/graph/badge.svg)](https://codecov.io/gh/sammymutahigicheru/Movies) 
 
-👀  This project shows how to effectively apply modular clean architecture approach and dependency injection using daggerin kotlin.
+👀  This project shows how to effectively apply modular clean architecture approach and dependency injection using dagger.
 
 ### Prerequisites 
 
