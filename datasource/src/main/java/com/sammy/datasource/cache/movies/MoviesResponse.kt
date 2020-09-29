@@ -17,11 +17,13 @@ data class MoviesResponse(
     @Expose
     val totalResults: Int,
 
-    @SerializedName("results")
-    @Expose
-    val movies: List<Movie>,
-
     @SerializedName("total_pages")
     @Expose
-    val totalPages: Int
+    val totalPages: Int,
+
+    @SerializedName("results")
+    @Expose
+    val movies: List<Movie>
+
+
 )

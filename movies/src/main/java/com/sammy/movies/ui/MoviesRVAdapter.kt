@@ -29,7 +29,7 @@ class MoviesRVAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ItemViewHolder).releaseDate.text = movies.movies[position].releaseDate
         holder.title.text = movies.movies[position].title
-        holder.rating.text = movies.movies[position].rating.toString()
+       // holder.rating.text = movies.movies[position].rating.toString()
         Glide.with(holder.poster.context)
             .load(IMAGE_BASE_URL + movies.movies[position].posterPath)
             .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
