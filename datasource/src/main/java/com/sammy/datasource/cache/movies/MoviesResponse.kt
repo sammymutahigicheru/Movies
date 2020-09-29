@@ -11,17 +11,17 @@ data class MoviesResponse(
     @PrimaryKey
     @NonNull
     @SerializedName("page") @Expose
-    var page: Int = 0,
+    var page: Int,
 
     @SerializedName("total_results")
     @Expose
-    val totalResults: Int = 0,
+    val totalResults: Int,
 
     @SerializedName("results")
     @Expose
-    val movies: List<Movie>? = null,
+    val movies: List<Movie>,
 
     @SerializedName("total_pages")
     @Expose
-    val totalPages: Int = 0
+    val totalPages: Int
 )

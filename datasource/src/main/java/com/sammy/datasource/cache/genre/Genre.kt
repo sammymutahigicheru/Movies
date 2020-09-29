@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName
 
 data class Genre(
     @SerializedName("id") @Expose
-    private var id: Int = 0,
+    var id: Int,
 
     @SerializedName("name")
     @Expose
-    private val name: String? = null
+    val name: String
 )

@@ -8,36 +8,36 @@ import com.google.gson.annotations.SerializedName
 import com.sammy.datasource.cache.genre.Genre
 data class Movie(
     @SerializedName("id") @Expose
-    private var id: Int = 0,
+    var id: Int,
     @SerializedName("title")
     @Expose
-    private val title: String? = null,
+    val title: String,
 
     @SerializedName("poster_path")
     @Expose
-    private val posterPath: String? = null,
+    val posterPath: String,
 
     @SerializedName("release_date")
     @Expose
-    private val releaseDate: String? = null,
+    val releaseDate: String,
 
     @SerializedName("vote_average")
     @Expose
-    private val rating: Float = 0f,
+    val rating: Float = 0f,
 
     @SerializedName("genre_ids")
     @Expose
-    private val genreIds: List<Int>? = null,
+    val genreIds: List<Int>,
 
     @SerializedName("overview")
     @Expose
-    private val overview: String? = null,
+    val overview: String,
 
     @SerializedName("genres")
     @Expose
-    private val genres: List<Genre>? = null,
+    val genres: List<Genre>,
 
     @SerializedName("backdrop_path")
     @Expose
-    private val backdrop: String? = null
+    val backdrop: String
 )
