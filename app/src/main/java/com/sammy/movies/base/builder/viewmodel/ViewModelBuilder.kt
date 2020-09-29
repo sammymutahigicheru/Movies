@@ -1,4 +1,4 @@
-package com.sammy.movies.base.viewmodel
+package com.sammy.movies.base.builder.viewmodel
 
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds

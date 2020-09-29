@@ -5,7 +5,7 @@
     android:id="@+id/navigation_movies" app:startDestination="@id/moviesListFragment"
     >
     <fragment android:id="@+id/moviesListFragment"
-        android:name="com.sammy.movies.MoviesFragment"
+        android:name="com.sammy.movies.ui.MoviesFragment"
         tools:layout="@layout/fragment_movies"
         android:label="MoviesListFragment">
         <deepLink app:uri="@string/movies_list_uri" />

@@ -1,10 +1,10 @@
-package com.sammy.movies
+package com.sammy.movies.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.sammy.movies.R
 import dagger.android.support.DaggerFragment
 
 

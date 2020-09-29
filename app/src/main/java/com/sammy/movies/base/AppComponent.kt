@@ -2,7 +2,8 @@ package com.sammy.movies.base
 
 import android.app.Application
 import com.sammy.datasource.NetworkModule
-import com.sammy.movies.base.viewmodel.ViewModelBuilder
+import com.sammy.movies.base.builder.ActivityBuilder
+import com.sammy.movies.base.builder.viewmodel.ViewModelBuilder
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
