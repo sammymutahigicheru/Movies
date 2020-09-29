@@ -23,14 +23,14 @@ interface MoviesApi {
         @Query("api_key") apiKey: String?,
         @Query("language") language: String?,
         @Query("page") page: Int
-    ): Call<MoviesResponse?>?
+    ): Call<MoviesResponse>
 
     @GET("movie/upcoming")
     fun getUpcomingMovies(
         @Query("api_key") apiKey: String?,
         @Query("language") language: String?,
         @Query("page") page: Int
-    ): Call<MoviesResponse?>?
+    ): Call<MoviesResponse>
 
     @GET("genre/movie/list")
     fun getGenres(
