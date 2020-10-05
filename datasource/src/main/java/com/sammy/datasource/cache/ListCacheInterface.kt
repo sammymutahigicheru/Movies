@@ -8,8 +8,8 @@ interface ListCacheInterface<V> {
 
 
     @WorkerThread
-    suspend fun  save(items : V)
+    suspend fun  save(items : List<V>)
 
-     fun  load() : LiveData<V>
+     fun  load() : LiveData<List<V>>
 
 }
