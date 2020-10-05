@@ -146,15 +146,4 @@ class MoviesFragment : DaggerFragment() {
         return true
     }
 
-    /*private fun showSortMenu() {
-        val sortMenu =
-            PopupMenu(context, activity!!.findViewById(R.id.sort))
-        sortMenu.menuInflater.inflate(R.menu.menu_movies_sort,sortMenu.menu)
-        sortMenu.setOnMenuItemClickListener { item ->
-
-
-        }
-        sortMenu.show()
-    }*/
-
 }
