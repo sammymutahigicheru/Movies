@@ -1,7 +1,10 @@
 package com.sammy.movies.ui
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toolbar
 import androidx.lifecycle.Observer
@@ -30,11 +33,6 @@ class MoviesFragment : DaggerFragment() {
     private var isFetchingMovies:Boolean = false
     private var currentPage = 1
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +42,10 @@ class MoviesFragment : DaggerFragment() {
         val view = inflater.inflate(R.layout.fragment_movies, container, false)
         val toolbar: Toolbar = view.findViewById(R.id.toolbar)
         activity!!.setActionBar(toolbar)
+        toolbar.inflateMenu(R.menu.menu_movies_sort)
+        toolbar.setOnMenuItemClickListener {
+            onOptionsItemSelected(it)
+        }
         return view
     }
 
@@ -121,48 +123,38 @@ class MoviesFragment : DaggerFragment() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu, menu)
-
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(R.id.sort == item.itemId){
-            showSortMenu()
-            return true
-        }else{
-            return super.onOptionsItemSelected(item)
-        }
-
-    }
-
-    private fun showSortMenu() {
-        val sortMenu =
-            PopupMenu(context,activity!!.findViewById(R.id.sort))
-        sortMenu.setOnMenuItemClickListener { item ->
-            currentPage = 1
-            when (item.itemId) {
-                R.id.popular -> {
-                    sortBy = POPULAR
-                    getData(currentPage)
-                    true
-                }
-                R.id.top_rated -> {
-                    sortBy = TOP_RATED
-                    getData(currentPage)
-                    true
-                }
-                R.id.upcoming -> {
-                    sortBy = UPCOMING
-                    getData(currentPage)
-                    true
-                }
-                else -> false
+        currentPage = 1
+        when (item.itemId) {
+            R.id.popular -> {
+                sortBy = POPULAR
+                getData(currentPage)
+                true
             }
+            R.id.top_rated -> {
+                sortBy = TOP_RATED
+                getData(currentPage)
+                true
+            }
+            R.id.upcoming -> {
+                sortBy = UPCOMING
+                getData(currentPage)
+                true
+            }
+            else -> false
         }
-        sortMenu.inflate(R.menu.menu_movies_sort)
-        sortMenu.show()
+        return true
     }
+
+    /*private fun showSortMenu() {
+        val sortMenu =
+            PopupMenu(context, activity!!.findViewById(R.id.sort))
+        sortMenu.menuInflater.inflate(R.menu.menu_movies_sort,sortMenu.menu)
+        sortMenu.setOnMenuItemClickListener { item ->
+
+
+        }
+        sortMenu.show()
+    }*/
 
 }
