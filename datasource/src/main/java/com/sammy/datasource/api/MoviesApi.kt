@@ -36,7 +36,7 @@ interface MoviesApi {
     fun getGenres(
         @Query("api_key") apiKey: String?,
         @Query("language") language: String?
-    ): Call<GenreResponse?>?
+    ): Call<GenreResponse>
 
     @GET("movie/{movie_id}")
     fun getMovie(

@@ -10,8 +10,8 @@ import com.sammy.datasource.cache.movies.MoviesResponse
 @Dao
 interface GenreDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(genre: List<Genre>)
+    fun save(genre: GenreResponse)
 
-    @Query("SELECT * FROM genre")
-    fun load(): LiveData<List<Genre>>
+    @Query("SELECT * FROM genreresponse")
+    fun load(): LiveData<GenreResponse>
 }

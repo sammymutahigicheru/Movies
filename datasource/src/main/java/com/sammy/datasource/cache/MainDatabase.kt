@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.sammy.datasource.cache.genre.Genre
 import com.sammy.datasource.cache.genre.GenreDao
+import com.sammy.datasource.cache.genre.GenreResponse
 import com.sammy.datasource.cache.movies.MovieDao
 import com.sammy.datasource.cache.movies.MoviesResponse
 import com.sammy.datasource.utils.Converters
@@ -14,7 +15,7 @@ import com.sammy.datasource.utils.Converters
 @Database(
     entities = [
         MoviesResponse::class,
-        Genre::class
+        GenreResponse::class
     ], version = 1
 )
 @TypeConverters(Converters::class)
