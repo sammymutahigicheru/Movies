@@ -8,13 +8,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.sammy.datasource.cache.genre.GenreResponse
 import com.sammy.datasource.cache.movies.MoviesResponse
 import com.sammy.movies.R
 import com.squareup.picasso.Picasso
 
 class MoviesRVAdapter(
     val context: Context,
-    val movies: MoviesResponse
+    val movies: MoviesResponse,
+    genres: GenreResponse
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
