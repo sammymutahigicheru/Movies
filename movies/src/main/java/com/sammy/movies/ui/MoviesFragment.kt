@@ -138,7 +138,7 @@ class MoviesFragment : DaggerFragment() {
         movies: MoviesResponse,
         genres: GenreResponse
     ) {
-        adapter = MoviesRVAdapter(context!!,movies,genres)
+        adapter = MoviesRVAdapter(movies,genres)
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         movies_list.layoutManager = layoutManager
         movies_list.adapter = adapter

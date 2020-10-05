@@ -14,9 +14,8 @@ import com.sammy.movies.R
 import com.squareup.picasso.Picasso
 
 class MoviesRVAdapter(
-    val context: Context,
     val movies: MoviesResponse,
-    genres: GenreResponse
+    val genres: GenreResponse
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
