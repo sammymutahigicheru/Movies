@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.sammy.datasource.cache.movies.MoviesResponse
 import com.sammy.movies.R
@@ -31,10 +32,11 @@ class MoviesRVAdapter(
             movies.movies[position].releaseDate.split("-")[0]
         holder.title.text = movies.movies[position].title
         holder.rating.text = movies.movies[position].rating.toString()
-
-
         Picasso.get().load("https://image.tmdb.org/t/p/w500${movies.movies[position].posterPath}")
             .into(holder.poster)
+        holder.rootLayout.setOnClickListener {
+
+        }
 
 
     }
@@ -45,6 +47,7 @@ class MoviesRVAdapter(
         val rating: TextView = itemView.findViewById(R.id.item_movie_rating)
         val genres: TextView = itemView.findViewById(R.id.item_movie_genre)
         val poster: ImageView = itemView.findViewById(R.id.item_movie_poster)
+        val rootLayout:CardView = itemView.findViewById(R.id.rootLayout)
     }
 
 
