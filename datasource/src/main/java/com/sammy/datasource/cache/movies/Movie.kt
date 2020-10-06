@@ -9,23 +9,23 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Movie(
     @SerializedName("id") @Expose
-    var id: Int,
+    var id: Int?=null,
 
     @SerializedName("title")
     @Expose
-    val title: String,
+    val title: String?=null,
 
     @SerializedName("poster_path")
     @Expose
-    val posterPath: String,
+    val posterPath: String?=null,
 
     @SerializedName("release_date")
     @Expose
-    val releaseDate: String,
+    val releaseDate: String?=null,
 
     @SerializedName("vote_average")
     @Expose
-    val rating:Float,
+    val rating:Float?=null,
 
     @SerializedName("genre_ids")
     @Expose
@@ -33,13 +33,13 @@ data class Movie(
 
     @SerializedName("overview")
     @Expose
-    val overview: String,
+    val overview: String?=null,
 
     @SerializedName("genres")
     @Expose
-    val genres: List<Genre>,
+    val genres: List<Genre>?=null,
 
     @SerializedName("backdrop_path")
     @Expose
-    val backdrop: String
+    val backdrop: String?=null
 ): Parcelable

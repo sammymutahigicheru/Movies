@@ -18,6 +18,7 @@ class MovieDetailsActivity : AppCompatActivity() {
     private fun setupToolbar() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setActionBar(toolbar)
+        setTitle(movie.title)
         if (supportActionBar != null) {
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setDisplayShowTitleEnabled(false)

@@ -34,7 +34,7 @@ class MoviesRVAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ItemViewHolder).releaseDate.text =
-            movies.movies[position].releaseDate.split("-")[0]
+            movies.movies[position].releaseDate!!.split("-")[0]
         holder.title.text = movies.movies[position].title
         holder.rating.text = movies.movies[position].rating.toString()
        // holder.genres.text = getGenres(movies.movies[position].genreIds)
