@@ -50,7 +50,7 @@ interface MoviesApi {
         @Path("movie_id") id: Int,
         @Query("api_key") apiKEy: String?,
         @Query("language") language: String?
-    ): Call<TrailerResponse?>?
+    ): Call<TrailerResponse>
 
     @GET("movie/{movie_id}/reviews")
     fun getReviews(
