@@ -1,11 +1,11 @@
 package com.sammy.movies.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import android.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sammy.datasource.cache.genre.GenreResponse
 import com.sammy.datasource.cache.movies.MoviesResponse
 import com.sammy.movies.R
+import com.sammy.movies.details.MovieDetailsActivity
 import com.sammy.movies.utils.POPULAR
 import com.sammy.movies.utils.TOP_RATED
 import com.sammy.movies.utils.UPCOMING
@@ -31,7 +32,7 @@ class MoviesFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private var sortBy = POPULAR
-    private var isFetchingMovies:Boolean = false
+    private var isFetchingMovies: Boolean = false
     private var currentPage = 1
 
 
@@ -59,6 +60,7 @@ class MoviesFragment : DaggerFragment() {
         setupOnScrollListener()
 
     }
+
     private fun setupOnScrollListener() {
         val manager = LinearLayoutManager(context)
         movies_list.setLayoutManager(manager)
@@ -77,21 +79,23 @@ class MoviesFragment : DaggerFragment() {
         })
     }
 
-    private fun getData(page:Int) {
+    private fun getData(page: Int) {
         isFetchingMovies = true
-        moviesViewModel.getMovies(page,sortBy).observe(this, Observer {movie -> run{
-            if(movie != null){
-                moviesViewModel.getGenre().observe(this,Observer{genre -> run{
-                    if(genre != null){
-                        initRecyclerView(movie,genre)
-                        isFetchingMovies = false
-                        currentPage = page
-                        setTitle()
-                    }
+        moviesViewModel.getMovies(page, sortBy).observe(this, Observer { movie ->
+            run {
+                if (movie != null) {
+                    moviesViewModel.getGenre().observe(this, Observer { genre ->
+                        run {
+                            if (genre != null) {
+                                initRecyclerView(movie, genre)
+                                isFetchingMovies = false
+                                currentPage = page
+                                setTitle()
+                            }
+                        }
+                    })
                 }
-                })
             }
-        }
 
         })
 
@@ -99,11 +103,11 @@ class MoviesFragment : DaggerFragment() {
     }
 
     private fun setTitle() {
-        if (sortBy == POPULAR){
+        if (sortBy == POPULAR) {
             activity!!.title = "Popular"
-        }else if(sortBy == TOP_RATED){
+        } else if (sortBy == TOP_RATED) {
             activity!!.title = "Top Rated"
-        }else{
+        } else {
             activity!!.title = "Upcoming"
         }
     }
@@ -114,21 +118,20 @@ class MoviesFragment : DaggerFragment() {
     }
 
 
-
     private fun initObservers() {
 
         moviesViewModel.moviesLiveData.observe(this, Observer { movie ->
             run {
                 if (movie != null) {
-                    moviesViewModel.genreLiveData.observe(this, Observer {genre -> run{
-                        if(genre != null ){
-                            initRecyclerView(movie,genre)
+                    moviesViewModel.genreLiveData.observe(this, Observer { genre ->
+                        run {
+                            if (genre != null) {
+                                initRecyclerView(movie, genre)
+                            }
                         }
-                    }
                     })
                 }
             }
-
 
 
         })
@@ -139,13 +142,16 @@ class MoviesFragment : DaggerFragment() {
         movies: MoviesResponse,
         genres: GenreResponse
     ) {
-        adapter = MoviesRVAdapter(movies,genres)
+        adapter = MoviesRVAdapter(movies, genres)
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         movies_list.layoutManager = layoutManager
         movies_list.adapter = adapter
-        adapter.onItemClick = { movie -> run{
-            Toast.makeText(context, movie.title,Toast.LENGTH_LONG).show()
-        }
+        adapter.onItemClick = { movie ->
+            run {
+                val intent = Intent(activity!!, MovieDetailsActivity::class.java)
+                intent.putExtra("movie_id", movie.id)
+                activity!!.startActivity(intent)
+            }
 
         }
     }
