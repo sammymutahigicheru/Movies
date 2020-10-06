@@ -10,6 +10,8 @@ import com.sammy.datasource.cache.genre.GenreDao
 import com.sammy.datasource.cache.genre.GenreResponse
 import com.sammy.datasource.cache.movies.MovieDao
 import com.sammy.datasource.cache.movies.MoviesResponse
+import com.sammy.datasource.cache.reviews.ReviewDao
+import com.sammy.datasource.cache.reviews.ReviewResponse
 import com.sammy.datasource.cache.trailer.TrailerDao
 import com.sammy.datasource.cache.trailer.TrailerResponse
 import com.sammy.datasource.utils.Converters
@@ -18,7 +20,8 @@ import com.sammy.datasource.utils.Converters
     entities = [
         MoviesResponse::class,
         GenreResponse::class,
-    TrailerResponse::class
+    TrailerResponse::class,
+    ReviewResponse::class
     ], version = 1
 )
 @TypeConverters(Converters::class)
@@ -30,6 +33,8 @@ abstract class MainDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
 
     abstract fun trailerDao():TrailerDao
+
+    abstract fun reviewDao():ReviewDao
 
 
     companion object {

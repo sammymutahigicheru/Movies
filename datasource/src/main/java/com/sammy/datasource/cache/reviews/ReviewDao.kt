@@ -10,8 +10,8 @@ import com.sammy.datasource.cache.trailer.TrailerResponse
 @Dao
 interface ReviewDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(trailer: TrailerResponse)
+    fun save(review: ReviewResponse)
 
-    @Query("SELECT * FROM trailerresponse")
-    fun load(): LiveData<TrailerResponse>
+    @Query("SELECT * FROM reviewresponse")
+    fun load(): LiveData<ReviewResponse>
 }

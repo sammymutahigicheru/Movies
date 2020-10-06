@@ -57,5 +57,5 @@ interface MoviesApi {
         @Path("movie_id") id: Int,
         @Query("api_key") apiKEy: String?,
         @Query("language") language: String?
-    ): Call<ReviewResponse?>?
+    ): Call<ReviewResponse>
 }

@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken
 import com.sammy.datasource.cache.genre.Genre
 import com.sammy.datasource.cache.movies.Movie
 import com.sammy.datasource.cache.movies.MoviesResponse
+import com.sammy.datasource.cache.reviews.Review
 import com.sammy.datasource.cache.trailer.Trailer
 
 
@@ -47,6 +48,19 @@ class Converters {
     fun fromListTrailer(trailer: List<Trailer>): String {
         val gson = Gson()
         val value = gson.toJson(trailer)
+        return value
+    }
+    //reviews
+    @TypeConverter
+    fun fromStringListReview(value: String): List<Review> {
+        val type = object : TypeToken<List<Movie>>() {}.type
+        return Gson().fromJson(value, type);
+    }
+
+    @TypeConverter
+    fun fromListReview(review: List<Review>): String {
+        val gson = Gson()
+        val value = gson.toJson(review)
         return value
     }
 }

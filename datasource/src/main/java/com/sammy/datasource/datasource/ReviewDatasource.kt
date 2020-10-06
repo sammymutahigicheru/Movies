@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import com.app.network.cache.Listener
 import com.sammy.datasource.NetworkClient
 import com.sammy.datasource.api.MoviesApi
-import com.sammy.datasource.cache.trailer.TrailerPersist
-import com.sammy.datasource.cache.trailer.TrailerResponse
+import com.sammy.datasource.cache.reviews.ReviewPersist
+import com.sammy.datasource.cache.reviews.ReviewResponse
 import com.sammy.datasource.utils.API_KEY
 import com.sammy.datasource.utils.LANGUAGE
 import kotlinx.coroutines.GlobalScope
@@ -16,29 +16,29 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class TrailerDatasource @Inject constructor(
+class ReviewDatasource @Inject constructor(
     private val networkClient: NetworkClient<MoviesApi>,
-    val trailerPersist: TrailerPersist
+    val reviewPersist: ReviewPersist
 ) {
-    fun getTrailers(id:Int,listener: Listener<TrailerResponse>): LiveData<TrailerResponse> {
-        networkClient.getRetrofitService(MoviesApi::class.java).getTrailers(id,API_KEY, LANGUAGE)
-            .enqueue(object : Callback<TrailerResponse> {
-                override fun onFailure(call: Call<TrailerResponse>, t: Throwable) {
+    fun getTrailers(id:Int,listener: Listener<ReviewResponse>): LiveData<ReviewResponse> {
+        networkClient.getRetrofitService(MoviesApi::class.java).getReviews(id, API_KEY, LANGUAGE)
+            .enqueue(object : Callback<ReviewResponse> {
+                override fun onFailure(call: Call<ReviewResponse>, t: Throwable) {
                     Log.d("response_posts", t.message!!)
                 }
 
                 override fun onResponse(
-                    call: Call<TrailerResponse>,
-                    response: Response<TrailerResponse>
+                    call: Call<ReviewResponse>,
+                    response: Response<ReviewResponse>
                 ) {
                     response.body()?.let {
                         listener.onResponse(response = it)
                         GlobalScope.launch {
-                            trailerPersist.save(it)
+                            reviewPersist.save(it)
                         }
                     }
                 }
             })
-        return trailerPersist.load()
+        return reviewPersist.load()
     }
 }
