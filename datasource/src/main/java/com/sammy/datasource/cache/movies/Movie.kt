@@ -1,9 +1,12 @@
 package com.sammy.datasource.cache.movies
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.sammy.datasource.cache.genre.Genre
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Movie(
     @SerializedName("id") @Expose
     var id: Int,
@@ -39,4 +42,4 @@ data class Movie(
     @SerializedName("backdrop_path")
     @Expose
     val backdrop: String
-)
+): Parcelable

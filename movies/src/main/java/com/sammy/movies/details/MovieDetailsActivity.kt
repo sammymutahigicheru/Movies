@@ -11,6 +11,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_movie_details)
         setupToolbar()
     }
+
     private fun setupToolbar() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setActionBar(toolbar)
@@ -19,4 +20,6 @@ class MovieDetailsActivity : AppCompatActivity() {
             supportActionBar!!.setDisplayShowTitleEnabled(false)
         }
     }
+
+
 }

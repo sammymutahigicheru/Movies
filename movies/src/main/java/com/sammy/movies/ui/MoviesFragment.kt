@@ -149,7 +149,7 @@ class MoviesFragment : DaggerFragment() {
         adapter.onItemClick = { movie ->
             run {
                 val intent = Intent(activity!!, MovieDetailsActivity::class.java)
-                intent.putExtra("movie_id", movie.id)
+                intent.putExtra("movie", movie)
                 activity!!.startActivity(intent)
             }
 
