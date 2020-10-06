@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import android.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -142,6 +143,11 @@ class MoviesFragment : DaggerFragment() {
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         movies_list.layoutManager = layoutManager
         movies_list.adapter = adapter
+        adapter.onItemClick = { movie -> run{
+            Toast.makeText(context, movie.title,Toast.LENGTH_LONG).show()
+        }
+
+        }
     }
 
 
