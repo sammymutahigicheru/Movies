@@ -38,6 +38,7 @@ class MoviesFragment : DaggerFragment() {
     private var currentPage = 1
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -192,7 +193,7 @@ class MoviesFragment : DaggerFragment() {
         trailers: TrailerResponse,
         reviews: ReviewResponse
     ) {
-        adapter = MoviesRVAdapter(movies, genres,trailers,reviews)
+        adapter = MoviesRVAdapter(movies, genres)
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         movies_list.layoutManager = layoutManager
         movies_list.adapter = adapter
@@ -200,6 +201,8 @@ class MoviesFragment : DaggerFragment() {
             run {
                 val intent = Intent(activity!!, MovieDetailsActivity::class.java)
                 intent.putExtra("movie", movie)
+                intent.putExtra("trailers",trailers)
+                intent.putExtra("reviews",reviews)
                 activity!!.startActivity(intent)
             }
 
