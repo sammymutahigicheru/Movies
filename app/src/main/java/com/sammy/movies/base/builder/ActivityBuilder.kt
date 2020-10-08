@@ -7,13 +7,14 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class ActivityBuilder{
-   @ContributesAndroidInjector(
-       modules = [
-       MoviesFragmentBuilder::class,
-       MoviesViewModelBuilder::class
-       ]
-   )
-   internal abstract fun bindMainActivity(): MainActivity
-   internal abstract fun bindMovieDetailsActivity(): MovieDetailsActivity
+abstract class ActivityBuilder {
+    @ContributesAndroidInjector(
+        modules = [
+            MoviesFragmentBuilder::class,
+            MoviesViewModelBuilder::class,
+            MovieDetailsViewModelBuilder::class
+        ]
+    )
+    internal abstract fun bindMainActivity(): MainActivity
+    internal abstract fun bindMovieDetailsActivity(): MovieDetailsActivity
 }
