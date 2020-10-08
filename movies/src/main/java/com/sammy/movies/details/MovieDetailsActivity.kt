@@ -9,9 +9,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.sammy.datasource.cache.movies.Movie
 import com.sammy.movies.R
 import com.sammy.movies.utils.IMAGE_BASE_URL
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
-class MovieDetailsActivity : AppCompatActivity() {
+class MovieDetailsActivity : DaggerAppCompatActivity() {
     lateinit var movie:Movie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
