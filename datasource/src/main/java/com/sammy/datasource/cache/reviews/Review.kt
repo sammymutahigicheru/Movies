@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class Review(
     @SerializedName("author") @Expose
-    private var author: String? = null,
+    var author: String? = null,
 
     @SerializedName("content")
     @Expose
-    private val content: String? = null
+    val content: String? = null
 )

@@ -11,5 +11,5 @@ data class ReviewResponse(
     @PrimaryKey
     @NonNull
     @SerializedName("results") @Expose
-    private var reviews: List<Review>
+    var reviews: List<Review>
 )

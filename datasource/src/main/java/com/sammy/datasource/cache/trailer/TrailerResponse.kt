@@ -10,5 +10,5 @@ data class TrailerResponse(
     @PrimaryKey
     @NonNull
     @SerializedName("results") @Expose
-    private var trailers: List<Trailer>
+    var trailers: List<Trailer>
 )
