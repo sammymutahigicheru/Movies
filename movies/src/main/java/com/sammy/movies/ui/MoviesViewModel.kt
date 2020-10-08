@@ -21,8 +21,8 @@ class MoviesViewModel @Inject constructor(
 
     var moviesLiveData: MutableLiveData<MoviesResponse> = MutableLiveData()
     var genreLiveData: MutableLiveData<GenreResponse> = MutableLiveData()
-    var trailerLiveData:MutableLiveData<TrailerResponse> = MutableLiveData()
-    var reviewLiveData:MutableLiveData<ReviewResponse> = MutableLiveData()
+    var trailerLiveData: MutableLiveData<TrailerResponse> = MutableLiveData()
+    var reviewLiveData: MutableLiveData<ReviewResponse> = MutableLiveData()
 
     fun getMovies(page: Int, sortBy: String): LiveData<MoviesResponse> {
 
@@ -44,13 +44,22 @@ class MoviesViewModel @Inject constructor(
         })
 
     }
-    fun getTrailers(id:Int):LiveData<TrailerResponse>{
-        return trailerDatasource.getTrailers(id,object:Listener<TrailerResponse>{
+
+    fun getTrailers(id: Int): LiveData<TrailerResponse> {
+        return trailerDatasource.getTrailers(id, object : Listener<TrailerResponse> {
             override fun onResponse(response: TrailerResponse) {
                 trailerLiveData.postValue(response)
             }
 
         })
     }
-    
+
+    fun getReviews(id: Int): LiveData<ReviewResponse> {
+        return reviewDatasource.getReviews(id, object : Listener<ReviewResponse> {
+            override fun onResponse(response: ReviewResponse) {
+                reviewLiveData.postValue(response)
+            }
+
+        })
+    }
 }

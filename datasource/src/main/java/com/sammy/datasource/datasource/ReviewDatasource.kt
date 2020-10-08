@@ -20,7 +20,7 @@ class ReviewDatasource @Inject constructor(
     private val networkClient: NetworkClient<MoviesApi>,
     val reviewPersist: ReviewPersist
 ) {
-    fun getTrailers(id:Int,listener: Listener<ReviewResponse>): LiveData<ReviewResponse> {
+    fun getReviews(id:Int,listener: Listener<ReviewResponse>): LiveData<ReviewResponse> {
         networkClient.getRetrofitService(MoviesApi::class.java).getReviews(id, API_KEY, LANGUAGE)
             .enqueue(object : Callback<ReviewResponse> {
                 override fun onFailure(call: Call<ReviewResponse>, t: Throwable) {
