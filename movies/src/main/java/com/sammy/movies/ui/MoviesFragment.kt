@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sammy.datasource.cache.genre.GenreResponse
 import com.sammy.datasource.cache.movies.MoviesResponse
+import com.sammy.datasource.cache.reviews.ReviewResponse
+import com.sammy.datasource.cache.trailer.TrailerResponse
 import com.sammy.movies.R
 import com.sammy.movies.details.MovieDetailsActivity
 import com.sammy.movies.utils.POPULAR
@@ -87,10 +89,32 @@ class MoviesFragment : DaggerFragment() {
                     moviesViewModel.getGenre().observe(this, Observer { genre ->
                         run {
                             if (genre != null) {
-                                initRecyclerView(movie, genre)
-                                isFetchingMovies = false
-                                currentPage = page
-                                setTitle()
+
+                                moviesViewModel.getTrailers(movie.movies.listIterator().next().id!!)
+                                    .observe(this, Observer { trailers ->
+                                        run {
+                                            if (trailers != null) {
+                                                moviesViewModel.getReviews(
+                                                    movie.movies.listIterator().next().id!!
+                                                ).observe(this, Observer { reviews ->
+                                                    run {
+                                                        if (reviews != null) {
+                                                            initRecyclerView(
+                                                                movie,
+                                                                genre,
+                                                                trailers,
+                                                                reviews
+                                                            )
+                                                            isFetchingMovies = false
+                                                            currentPage = page
+                                                            setTitle()
+                                                        }
+                                                    }
+
+                                                })
+                                            }
+                                        }
+                                    })
                             }
                         }
                     })
@@ -126,20 +150,34 @@ class MoviesFragment : DaggerFragment() {
                     moviesViewModel.genreLiveData.observe(this, Observer { genre ->
                         run {
                             if (genre != null) {
-                                initRecyclerView(movie, genre)
+                                //NOT BEST APPROACH BUT CAN HOLD FOR NOW
+                                moviesViewModel.trailerLiveData.observe(this, Observer { trailers ->
+                                    run {
+                                        if (trailers != null) {
+                                            moviesViewModel.reviewLiveData.observe(
+                                                this,
+                                                Observer { reviews ->
+                                                    run {
+                                                        if (reviews != null) {
+                                                            initRecyclerView(
+                                                                movie,
+                                                                genre,
+                                                                trailers,
+                                                                reviews
+                                                            )
+                                                        }
+                                                    }
+
+                                                })
+                                        }
+                                    }
+
+                                })
                             }
                         }
                     })
-                    moviesViewModel.trailerLiveData.observe(this,Observer{trailers ->run{
 
-                    }
 
-                    })
-                    moviesViewModel.reviewLiveData.observe(this, Observer {reviews -> run{
-
-                    }
-
-                    })
                 }
             }
 
@@ -150,9 +188,11 @@ class MoviesFragment : DaggerFragment() {
 
     private fun initRecyclerView(
         movies: MoviesResponse,
-        genres: GenreResponse
+        genres: GenreResponse,
+        trailers: TrailerResponse,
+        reviews: ReviewResponse
     ) {
-        adapter = MoviesRVAdapter(movies, genres)
+        adapter = MoviesRVAdapter(movies, genres,trailers,reviews)
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         movies_list.layoutManager = layoutManager
         movies_list.adapter = adapter

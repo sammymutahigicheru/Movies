@@ -10,14 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sammy.datasource.cache.genre.GenreResponse
 import com.sammy.datasource.cache.movies.Movie
 import com.sammy.datasource.cache.movies.MoviesResponse
+import com.sammy.datasource.cache.reviews.ReviewResponse
+import com.sammy.datasource.cache.trailer.TrailerResponse
 import com.sammy.movies.R
 import com.squareup.picasso.Picasso
-import okhttp3.internal.userAgent
 import java.util.*
 
 class MoviesRVAdapter(
     val movies: MoviesResponse,
-    val genres: GenreResponse
+    val genres: GenreResponse,
+    trailers: TrailerResponse,
+    reviews: ReviewResponse
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
