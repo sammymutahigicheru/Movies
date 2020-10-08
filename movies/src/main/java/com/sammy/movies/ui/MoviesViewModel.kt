@@ -15,14 +15,10 @@ import com.sammy.datasource.datasource.TrailerDatasource
 import javax.inject.Inject
 
 class MoviesViewModel @Inject constructor(
-    val dataSource: MovieDataSource, val genreDataSource: GenreDataSource,
-    val reviewDatasource: ReviewDatasource, val trailerDatasource: TrailerDatasource
+    val dataSource: MovieDataSource
 ) : ViewModel() {
 
     var moviesLiveData: MutableLiveData<MoviesResponse> = MutableLiveData()
-    var genreLiveData: MutableLiveData<GenreResponse> = MutableLiveData()
-    var trailerLiveData: MutableLiveData<TrailerResponse> = MutableLiveData()
-    var reviewLiveData: MutableLiveData<ReviewResponse> = MutableLiveData()
 
     fun getMovies(page: Int, sortBy: String): LiveData<MoviesResponse> {
 
@@ -35,31 +31,5 @@ class MoviesViewModel @Inject constructor(
 
     }
 
-    fun getGenre(): LiveData<GenreResponse> {
-        return genreDataSource.getGenres(object :
-            Listener<GenreResponse> {
-            override fun onResponse(response: GenreResponse) {
-                genreLiveData.postValue(response)
-            }
-        })
 
-    }
-
-    fun getTrailers(id: Int): LiveData<TrailerResponse> {
-        return trailerDatasource.getTrailers(id, object : Listener<TrailerResponse> {
-            override fun onResponse(response: TrailerResponse) {
-                trailerLiveData.postValue(response)
-            }
-
-        })
-    }
-
-    fun getReviews(id: Int): LiveData<ReviewResponse> {
-        return reviewDatasource.getReviews(id, object : Listener<ReviewResponse> {
-            override fun onResponse(response: ReviewResponse) {
-                reviewLiveData.postValue(response)
-            }
-
-        })
-    }
 }
