@@ -130,6 +130,16 @@ class MoviesFragment : DaggerFragment() {
                             }
                         }
                     })
+                    moviesViewModel.trailerLiveData.observe(this,Observer{trailers ->run{
+
+                    }
+
+                    })
+                    moviesViewModel.reviewLiveData.observe(this, Observer {reviews -> run{
+
+                    }
+
+                    })
                 }
             }
 
