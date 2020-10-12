@@ -10,7 +10,7 @@ This project brings to table set of best practices, tools, and solutions:
 * 100% Kotlin
 * Model-View-View Model Architecture
 * Android Jetpack
-- [x] Testing
+- [ ] Testing
 * Dependency Injection
 * Material design
 
