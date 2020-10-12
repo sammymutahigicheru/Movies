@@ -11,8 +11,7 @@ abstract class ActivityBuilder {
     @ContributesAndroidInjector(
         modules = [
             MoviesFragmentBuilder::class,
-            MoviesViewModelBuilder::class,
-            MovieDetailsViewModelBuilder::class
+            MoviesViewModelBuilder::class
         ]
     )
     internal abstract fun bindMainActivity(): MainActivity

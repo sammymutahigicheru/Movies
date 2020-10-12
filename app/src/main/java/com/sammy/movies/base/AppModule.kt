@@ -6,10 +6,11 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module(subcomponents = [
-    MainActivityComponent::class,
-MoviesDetailsActivityComponent::class
-]
+@Module
+    (
+    subcomponents = [
+        MainActivityComponent::class
+    ]
 
 )
 class AppModule {

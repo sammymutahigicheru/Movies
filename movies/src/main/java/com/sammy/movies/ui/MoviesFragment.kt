@@ -25,7 +25,6 @@ import javax.inject.Inject
 
 class MoviesFragment : DaggerFragment() {
     lateinit var adapter: MoviesRVAdapter
-
     private lateinit var moviesViewModel: MoviesViewModel
 
     @Inject
@@ -83,14 +82,10 @@ class MoviesFragment : DaggerFragment() {
         moviesViewModel.getMovies(page, sortBy).observe(this, Observer { movie ->
             run {
                 if (movie != null) {
-                    moviesViewModel.getGenre().observe(this, Observer { genre ->
-                        run {
-                            initRecyclerView(movie)
-                            isFetchingMovies = false
-                            currentPage = page
-                            setTitle()
-                        }
-                    })
+                    initRecyclerView(movie)
+                    isFetchingMovies = false
+                    currentPage = page
+                    setTitle()
                 }
             }
 

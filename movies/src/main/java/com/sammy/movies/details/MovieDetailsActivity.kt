@@ -4,23 +4,121 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.sammy.datasource.cache.genre.GenreResponse
 import com.sammy.datasource.cache.movies.Movie
+import com.sammy.datasource.cache.reviews.ReviewResponse
+import com.sammy.datasource.cache.trailer.TrailerResponse
 import com.sammy.movies.R
-import com.sammy.movies.utils.IMAGE_BASE_URL
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
-class MovieDetailsActivity : DaggerAppCompatActivity() {
+class MovieDetailsActivity : AppCompatActivity() {
+
     lateinit var movie:Movie
+    /*lateinit var genreResponse:GenreResponse
+    lateinit var trailersResponse:TrailerResponse
+    lateinit var reviewResponse: ReviewResponse
+
+    private lateinit var moviesViewModel: MoviesViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_details)
         movie = intent.getParcelableExtra("movie")!!
         setupToolbar()
+       /* initViewModel()
+        initObservers()
+        getData()*/
         initItems()
+
     }
+
+    /*private fun getData() {
+        //get reviews
+        moviesViewModel.getReviews(movie.id!!).observe(this, Observer { reviews ->
+            run {
+                if (reviews != null) {
+                    initReviews(reviews)
+                }
+            }
+
+        })
+        //get Trailers
+        moviesViewModel.getTrailers(movie.id!!).observe(this, Observer { trailers ->
+            run {
+                if (trailers != null) {
+                    initTrailers(trailers)
+                }
+            }
+
+        })
+        //get genre
+        moviesViewModel.getGenre().observe(this, Observer { genres ->
+            run {
+                if (genres != null) {
+                    initGenre(genres)
+                }
+            }
+
+        })
+    }
+
+    private fun initViewModel() {
+        moviesViewModel = ViewModelProviders.of(this, viewModelFactory)[MoviesViewModel::class.java]
+    }
+    private fun initObservers() {
+        //genres
+        moviesViewModel.genreLiveData.observe(this, Observer { genres ->
+            run {
+                if (genres != null) {
+                    initGenre(genres)
+                }
+            }
+
+
+        })
+        //reviews
+        moviesViewModel.reviewLiveData.observe(this, Observer { reviews ->
+            run {
+                if (reviews != null) {
+                    initReviews(reviews)
+                }
+            }
+
+
+        })
+        //trailers
+        moviesViewModel.trailerLiveData.observe(this, Observer { trailers ->
+            run {
+                if (trailers != null) {
+                    initTrailers(trailers)
+                }
+            }
+
+
+        })
+
+    }
+
+    private fun initTrailers(trailers: TrailerResponse) {
+        trailersResponse = trailers
+    }
+
+    private fun initReviews(reviews: ReviewResponse) {
+        reviewResponse = reviews
+
+    }
+
+    private fun initGenre(genre: GenreResponse) {
+        genreResponse = genre
+    }*/
 
     private fun initItems() {
         movieDetailsTitle.text = movie.title
