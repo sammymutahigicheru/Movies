@@ -3,9 +3,16 @@
 
 👀  This project shows how to effectively apply modular clean architecture approach and dependency injection using dagger.
 
-### Prerequisites 
+ ## Project characteristics
 
-Latest android studio and java 8
+This project brings to table set of best practices, tools, and solutions:
+
+* 100% Kotlin
+* Model-View-View Model Architecture
+* Android Jetpack
+- [x] Testing
+* Dependency Injection
+* Material design
 
 ## Tech-stack
 
@@ -26,6 +33,20 @@ Latest android studio and java 8
         * [CodeCov](https://codecov.io/gh/) - a Code Coverage Library
 * CI/CD
     * CircleCI 
+    
+## Getting started
+ 
+ There are a few ways to open this project.
+ 
+ ### Android Studio
+ 
+ 1. Android Studio -> File -> New -> From Version control -> Git
+ 2. Enter `https://github.com/sammymutahigicheru/Movies.git` into URL field
+ 
+ ### Command line + Android Studio
+ 
+ 1. Run `git clone https://github.com/sammymutahigicheru/Movies.git`
+ 2. Android Studio -> File -> Open    
 
 ## License
 ```
