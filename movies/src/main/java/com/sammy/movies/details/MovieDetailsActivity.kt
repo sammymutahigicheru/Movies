@@ -14,33 +14,40 @@ import com.sammy.datasource.cache.movies.Movie
 import com.sammy.datasource.cache.reviews.ReviewResponse
 import com.sammy.datasource.cache.trailer.TrailerResponse
 import com.sammy.movies.R
+import com.sammy.movies.base.MovieDetailsProvider
 import kotlinx.android.synthetic.main.activity_movie_details.*
+import javax.inject.Inject
 
 class MovieDetailsActivity : AppCompatActivity() {
 
     lateinit var movie:Movie
-    /*lateinit var genreResponse:GenreResponse
+    lateinit var genreResponse:GenreResponse
     lateinit var trailersResponse:TrailerResponse
     lateinit var reviewResponse: ReviewResponse
 
-    private lateinit var moviesViewModel: MoviesViewModel
+    private lateinit var moviesViewModel: MovieDetailsViewModel
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory*/
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_details)
+        //inject
+        val movieDetailsComponent =  (applicationContext as MovieDetailsProvider)
+            .provideMovieDetailsComponent()
+        movieDetailsComponent.inject(this)
+        //get intent
         movie = intent.getParcelableExtra("movie")!!
         setupToolbar()
-       /* initViewModel()
+        initViewModel()
         initObservers()
-        getData()*/
+        getData()
         initItems()
 
     }
 
-    /*private fun getData() {
+    private fun getData() {
         //get reviews
         moviesViewModel.getReviews(movie.id!!).observe(this, Observer { reviews ->
             run {
@@ -71,7 +78,7 @@ class MovieDetailsActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        moviesViewModel = ViewModelProviders.of(this, viewModelFactory)[MoviesViewModel::class.java]
+        moviesViewModel = ViewModelProviders.of(this, viewModelFactory)[MovieDetailsViewModel::class.java]
     }
     private fun initObservers() {
         //genres
@@ -118,7 +125,7 @@ class MovieDetailsActivity : AppCompatActivity() {
 
     private fun initGenre(genre: GenreResponse) {
         genreResponse = genre
-    }*/
+    }
 
     private fun initItems() {
         movieDetailsTitle.text = movie.title

@@ -12,8 +12,8 @@ abstract class ActivityBuilder {
         modules = [
             MoviesFragmentBuilder::class,
             MoviesViewModelBuilder::class
+
         ]
     )
     internal abstract fun bindMainActivity(): MainActivity
-    internal abstract fun bindMovieDetailsActivity(): MovieDetailsActivity
 }

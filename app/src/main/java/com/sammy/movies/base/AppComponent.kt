@@ -3,6 +3,7 @@ package com.sammy.movies.base
 import android.app.Application
 import com.sammy.datasource.NetworkModule
 import com.sammy.movies.base.builder.ActivityBuilder
+import com.sammy.movies.base.builder.MovieDetailsViewModelBuilder
 import com.sammy.movies.base.builder.viewmodel.ViewModelBuilder
 import dagger.BindsInstance
 import dagger.Component
@@ -18,7 +19,8 @@ import javax.inject.Singleton
     AppModule::class,
     NetworkModule::class,
     ViewModelBuilder::class,
-    ActivityBuilder::class
+    ActivityBuilder::class,
+    MovieDetailsViewModelBuilder::class
 
     ]
 )
@@ -34,4 +36,5 @@ interface AppComponent:AndroidInjector<DaggerApplication> {
 
         fun build(): AppComponent
     }
+    fun movieDetailsComponent():MovieDetailsComponent.Factory
 }
