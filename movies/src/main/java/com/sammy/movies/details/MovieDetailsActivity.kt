@@ -1,8 +1,11 @@
 package com.sammy.movies.details
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +20,8 @@ import com.sammy.datasource.cache.reviews.ReviewResponse
 import com.sammy.datasource.cache.trailer.TrailerResponse
 import com.sammy.movies.R
 import com.sammy.movies.base.MovieDetailsProvider
+import com.sammy.movies.utils.YOUTUBE_THUMBNAIL_URL
+import com.sammy.movies.utils.YOUTUBE_VIDEO_URL
 import kotlinx.android.synthetic.main.activity_movie_details.*
 import javax.inject.Inject
 
@@ -144,6 +149,44 @@ class MovieDetailsActivity : AppCompatActivity() {
         }
         getGenre()
         getReviews()
+        getTrailers()
+    }
+
+    private fun getTrailers() {
+        if(trailersResponse.trailers != null){
+            trailersLabel.visibility = View.VISIBLE
+            movieTrailers.removeAllViews()
+            for(trailer in trailersResponse.trailers){
+                val parent =
+                    layoutInflater.inflate(R.layout.thumbnail_trailer, movieTrailers, false)
+                val thumbnail =
+                    parent.findViewById<ImageView>(R.id.thumbnail)
+                thumbnail.requestLayout()
+                thumbnail.setOnClickListener {
+                    showTrailer(
+                        String.format(
+                            YOUTUBE_VIDEO_URL,
+                            trailer.key
+                        )
+                    )
+                }
+                Glide.with(this)
+                    .load(
+                        String.format(
+                            YOUTUBE_THUMBNAIL_URL,
+                            trailer.key
+                        )
+                    )
+                    .apply(RequestOptions.placeholderOf(R.color.colorPrimary).centerCrop())
+                    .into(thumbnail)
+                movieTrailers.addView(parent)
+            }
+        }
+    }
+
+    private fun showTrailer(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 
     private fun getReviews() {
