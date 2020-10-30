@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,9 +29,6 @@ import javax.inject.Inject
 class MovieDetailsActivity : AppCompatActivity() {
 
     lateinit var movie:Movie
-    lateinit var genreResponse:GenreResponse
-    lateinit var trailersResponse:TrailerResponse
-    lateinit var reviewResponse: ReviewResponse
 
     private lateinit var moviesViewModel: MovieDetailsViewModel
 
@@ -59,7 +57,19 @@ class MovieDetailsActivity : AppCompatActivity() {
         moviesViewModel.getReviews(movie.id!!).observe(this, Observer { reviews ->
             run {
                 if (reviews != null) {
-                    initReviews(reviews)
+                    /*reviewsLabel.visibility = View.VISIBLE
+                    movieReviews.removeAllViews()
+                    for(review in reviews.reviews){
+                        val parent =
+                            layoutInflater.inflate(R.layout.review, movieReviews, false)
+                        val author = parent.findViewById<TextView>(R.id.reviewAuthor)
+                        val content = parent.findViewById<TextView>(R.id.reviewContent)
+                        author.text = review.author
+                        content.text = review.content
+                        movieReviews.addView(parent)
+                    }*/
+                }else{
+                    Log.e("MovieDetails","Error**********")
                 }
             }
 
@@ -68,7 +78,33 @@ class MovieDetailsActivity : AppCompatActivity() {
         moviesViewModel.getTrailers(movie.id!!).observe(this, Observer { trailers ->
             run {
                 if (trailers != null) {
-                    initTrailers(trailers)
+                    /*trailersLabel.visibility = View.VISIBLE
+                    movieTrailers.removeAllViews()
+                    for(trailer in trailers.trailers){
+                        val parent =
+                            layoutInflater.inflate(R.layout.thumbnail_trailer, movieTrailers, false)
+                        val thumbnail =
+                            parent.findViewById<ImageView>(R.id.thumbnail)
+                        thumbnail.requestLayout()
+                        thumbnail.setOnClickListener {
+                            showTrailer(
+                                String.format(
+                                    YOUTUBE_VIDEO_URL,
+                                    trailer.key
+                                )
+                            )
+                        }
+                        Glide.with(this)
+                            .load(
+                                String.format(
+                                    YOUTUBE_THUMBNAIL_URL,
+                                    trailer.key
+                                )
+                            )
+                            .apply(RequestOptions.placeholderOf(R.color.colorPrimary).centerCrop())
+                            .into(thumbnail)
+                        movieTrailers.addView(parent)
+                    }*/
                 }
             }
 
@@ -77,7 +113,6 @@ class MovieDetailsActivity : AppCompatActivity() {
         moviesViewModel.getGenre().observe(this, Observer { genres ->
             run {
                 if (genres != null) {
-                    initGenre(genres)
                 }
             }
 
@@ -92,7 +127,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         moviesViewModel.genreLiveData.observe(this, Observer { genres ->
             run {
                 if (genres != null) {
-                    initGenre(genres)
+
                 }
             }
 
@@ -102,7 +137,17 @@ class MovieDetailsActivity : AppCompatActivity() {
         moviesViewModel.reviewLiveData.observe(this, Observer { reviews ->
             run {
                 if (reviews != null) {
-                    initReviews(reviews)
+                    reviewsLabel.visibility = View.VISIBLE
+                    movieReviews.removeAllViews()
+                    for(review in reviews.reviews){
+                        val parent =
+                            layoutInflater.inflate(R.layout.review, movieReviews, false)
+                        val author = parent.findViewById<TextView>(R.id.reviewAuthor)
+                        val content = parent.findViewById<TextView>(R.id.reviewContent)
+                        author.text = review.author
+                        content.text = review.content
+                        movieReviews.addView(parent)
+                    }
                 }
             }
 
@@ -112,26 +157,39 @@ class MovieDetailsActivity : AppCompatActivity() {
         moviesViewModel.trailerLiveData.observe(this, Observer { trailers ->
             run {
                 if (trailers != null) {
-                    initTrailers(trailers)
+                    trailersLabel.visibility = View.VISIBLE
+                    movieTrailers.removeAllViews()
+                    for(trailer in trailers.trailers){
+                        val parent =
+                            layoutInflater.inflate(R.layout.thumbnail_trailer, movieTrailers, false)
+                        val thumbnail =
+                            parent.findViewById<ImageView>(R.id.thumbnail)
+                        thumbnail.requestLayout()
+                        thumbnail.setOnClickListener {
+                            showTrailer(
+                                String.format(
+                                    YOUTUBE_VIDEO_URL,
+                                    trailer.key
+                                )
+                            )
+                        }
+                        Glide.with(this)
+                            .load(
+                                String.format(
+                                    YOUTUBE_THUMBNAIL_URL,
+                                    trailer.key
+                                )
+                            )
+                            .apply(RequestOptions.placeholderOf(R.color.colorPrimary).centerCrop())
+                            .into(thumbnail)
+                        movieTrailers.addView(parent)
+                    }
                 }
             }
 
 
         })
 
-    }
-
-    private fun initTrailers(trailers: TrailerResponse) {
-        trailersResponse = trailers
-    }
-
-    private fun initReviews(reviews: ReviewResponse) {
-        reviewResponse = reviews
-
-    }
-
-    private fun initGenre(genre: GenreResponse) {
-        genreResponse = genre
     }
 
     private fun initItems() {
@@ -148,62 +206,12 @@ class MovieDetailsActivity : AppCompatActivity() {
                 .into(movieDetailsBackdrop)
         }
         getGenre()
-        getReviews()
-        getTrailers()
     }
 
-    private fun getTrailers() {
-        if(trailersResponse.trailers != null){
-            trailersLabel.visibility = View.VISIBLE
-            movieTrailers.removeAllViews()
-            for(trailer in trailersResponse.trailers){
-                val parent =
-                    layoutInflater.inflate(R.layout.thumbnail_trailer, movieTrailers, false)
-                val thumbnail =
-                    parent.findViewById<ImageView>(R.id.thumbnail)
-                thumbnail.requestLayout()
-                thumbnail.setOnClickListener {
-                    showTrailer(
-                        String.format(
-                            YOUTUBE_VIDEO_URL,
-                            trailer.key
-                        )
-                    )
-                }
-                Glide.with(this)
-                    .load(
-                        String.format(
-                            YOUTUBE_THUMBNAIL_URL,
-                            trailer.key
-                        )
-                    )
-                    .apply(RequestOptions.placeholderOf(R.color.colorPrimary).centerCrop())
-                    .into(thumbnail)
-                movieTrailers.addView(parent)
-            }
-        }
-    }
 
     private fun showTrailer(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
-    }
-
-    private fun getReviews() {
-        if(reviewResponse.reviews != null){
-            reviewsLabel.visibility = View.VISIBLE
-            movieReviews.removeAllViews()
-            for(review in reviewResponse.reviews){
-                val parent =
-                    layoutInflater.inflate(R.layout.review, movieReviews, false)
-                val author = parent.findViewById<TextView>(R.id.reviewAuthor)
-                val content = parent.findViewById<TextView>(R.id.reviewContent)
-                author.text = review.author
-                content.text = review.content
-                movieReviews.addView(parent)
-            }
-
-        }
     }
 
     private fun getGenre() {
