@@ -1,7 +1,9 @@
 package com.sammy.movies.details
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
+import android.widget.TextView
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -139,6 +141,35 @@ class MovieDetailsActivity : AppCompatActivity() {
                 .load("https://image.tmdb.org/t/p/w500${movie.backdrop}")
                 .apply(RequestOptions.placeholderOf(R.color.colorPrimary))
                 .into(movieDetailsBackdrop)
+        }
+        getGenre()
+        getReviews()
+    }
+
+    private fun getReviews() {
+        if(reviewResponse.reviews != null){
+            reviewsLabel.visibility = View.VISIBLE
+            movieReviews.removeAllViews()
+            for(review in reviewResponse.reviews){
+                val parent =
+                    layoutInflater.inflate(R.layout.review, movieReviews, false)
+                val author = parent.findViewById<TextView>(R.id.reviewAuthor)
+                val content = parent.findViewById<TextView>(R.id.reviewContent)
+                author.text = review.author
+                content.text = review.content
+                movieReviews.addView(parent)
+            }
+
+        }
+    }
+
+    private fun getGenre() {
+        if(movie.genres != null){
+            val currentGenres:MutableList<String> = ArrayList()
+            for (genre in movie.genres!!){
+                currentGenres.add(genre.name!!)
+            }
+            movieDetailsGenres.text = TextUtils.join(", ", currentGenres)
         }
     }
 
