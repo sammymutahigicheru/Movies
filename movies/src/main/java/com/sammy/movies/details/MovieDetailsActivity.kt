@@ -46,77 +46,19 @@ class MovieDetailsActivity : AppCompatActivity() {
         movie = intent.getParcelableExtra("movie")!!
         setupToolbar()
         initViewModel()
-        initObservers()
         getData()
+        initObservers()
         initItems()
 
     }
 
     private fun getData() {
         //get reviews
-        moviesViewModel.getReviews(movie.id!!).observe(this, Observer { reviews ->
-            run {
-                if (reviews != null) {
-                    /*reviewsLabel.visibility = View.VISIBLE
-                    movieReviews.removeAllViews()
-                    for(review in reviews.reviews){
-                        val parent =
-                            layoutInflater.inflate(R.layout.review, movieReviews, false)
-                        val author = parent.findViewById<TextView>(R.id.reviewAuthor)
-                        val content = parent.findViewById<TextView>(R.id.reviewContent)
-                        author.text = review.author
-                        content.text = review.content
-                        movieReviews.addView(parent)
-                    }*/
-                }else{
-                    Log.e("MovieDetails","Error**********")
-                }
-            }
-
-        })
+        moviesViewModel.getReviews(movie.id!!)
         //get Trailers
-        moviesViewModel.getTrailers(movie.id!!).observe(this, Observer { trailers ->
-            run {
-                if (trailers != null) {
-                    /*trailersLabel.visibility = View.VISIBLE
-                    movieTrailers.removeAllViews()
-                    for(trailer in trailers.trailers){
-                        val parent =
-                            layoutInflater.inflate(R.layout.thumbnail_trailer, movieTrailers, false)
-                        val thumbnail =
-                            parent.findViewById<ImageView>(R.id.thumbnail)
-                        thumbnail.requestLayout()
-                        thumbnail.setOnClickListener {
-                            showTrailer(
-                                String.format(
-                                    YOUTUBE_VIDEO_URL,
-                                    trailer.key
-                                )
-                            )
-                        }
-                        Glide.with(this)
-                            .load(
-                                String.format(
-                                    YOUTUBE_THUMBNAIL_URL,
-                                    trailer.key
-                                )
-                            )
-                            .apply(RequestOptions.placeholderOf(R.color.colorPrimary).centerCrop())
-                            .into(thumbnail)
-                        movieTrailers.addView(parent)
-                    }*/
-                }
-            }
-
-        })
+        moviesViewModel.getTrailers(movie.id!!)
         //get genre
-        moviesViewModel.getGenre().observe(this, Observer { genres ->
-            run {
-                if (genres != null) {
-                }
-            }
-
-        })
+        moviesViewModel.getGenre()
     }
 
     private fun initViewModel() {
