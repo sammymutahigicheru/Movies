@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toolbar
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -20,32 +21,25 @@ import com.sammy.datasource.cache.movies.Movie
 import com.sammy.datasource.cache.reviews.ReviewResponse
 import com.sammy.datasource.cache.trailer.TrailerResponse
 import com.sammy.movies.R
-import com.sammy.movies.base.MovieDetailsProvider
 import com.sammy.movies.utils.YOUTUBE_THUMBNAIL_URL
 import com.sammy.movies.utils.YOUTUBE_VIDEO_URL
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_movie_details.*
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MovieDetailsActivity : AppCompatActivity() {
 
     lateinit var movie:Movie
 
-    private lateinit var moviesViewModel: MovieDetailsViewModel
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private  val moviesViewModel: MovieDetailsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_details)
-        //inject
-        val movieDetailsComponent =  (applicationContext as MovieDetailsProvider)
-            .provideMovieDetailsComponent()
-        movieDetailsComponent.inject(this)
         //get intent
         movie = intent.getParcelableExtra("movie")!!
         setupToolbar()
-        initViewModel()
         getData()
         initObservers()
         initItems()
@@ -59,10 +53,6 @@ class MovieDetailsActivity : AppCompatActivity() {
         moviesViewModel.getTrailers(movie.id!!)
         //get genre
         moviesViewModel.getGenre()
-    }
-
-    private fun initViewModel() {
-        moviesViewModel = ViewModelProviders.of(this, viewModelFactory)[MovieDetailsViewModel::class.java]
     }
     private fun initObservers() {
         //genres

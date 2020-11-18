@@ -7,6 +7,8 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -19,16 +21,14 @@ import com.sammy.movies.utils.POPULAR
 import com.sammy.movies.utils.TOP_RATED
 import com.sammy.movies.utils.UPCOMING
 import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
 
-
-class MoviesFragment : DaggerFragment() {
+@AndroidEntryPoint
+class MoviesFragment : Fragment() {
     lateinit var adapter: MoviesRVAdapter
-    private lateinit var moviesViewModel: MoviesViewModel
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val moviesViewModel: MoviesViewModel by viewModels()
     private var sortBy = POPULAR
     private var isFetchingMovies: Boolean = false
     private var currentPage = 1
@@ -41,7 +41,7 @@ class MoviesFragment : DaggerFragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_movies, container, false)
         val toolbar: Toolbar = view.findViewById(R.id.toolbar)
-        activity!!.setActionBar(toolbar)
+        requireActivity().setActionBar(toolbar)
         toolbar.inflateMenu(R.menu.menu_movies_sort)
         toolbar.setOnMenuItemClickListener {
             onOptionsItemSelected(it)
@@ -51,8 +51,6 @@ class MoviesFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        initViewModel()
         initObservers()
         getData(currentPage)
         setupOnScrollListener()
@@ -79,7 +77,7 @@ class MoviesFragment : DaggerFragment() {
 
     private fun getData(page: Int) {
         isFetchingMovies = true
-        moviesViewModel.getMovies(page, sortBy).observe(this, Observer { movie ->
+        moviesViewModel.getMovies(page, sortBy).observe(viewLifecycleOwner, Observer { movie ->
             run {
                 if (movie != null) {
                     initRecyclerView(movie)
@@ -96,23 +94,17 @@ class MoviesFragment : DaggerFragment() {
 
     private fun setTitle() {
         if (sortBy == POPULAR) {
-            activity!!.title = "Popular"
+            requireActivity().title = "Popular"
         } else if (sortBy == TOP_RATED) {
-            activity!!.title = "Top Rated"
+            requireActivity().title = "Top Rated"
         } else {
-            activity!!.title = "Upcoming"
+            requireActivity().title = "Upcoming"
         }
     }
 
-
-    private fun initViewModel() {
-        moviesViewModel = ViewModelProviders.of(this, viewModelFactory)[MoviesViewModel::class.java]
-    }
-
-
     private fun initObservers() {
 
-        moviesViewModel.moviesLiveData.observe(this, Observer { movie ->
+        moviesViewModel.moviesLiveData.observe(viewLifecycleOwner, Observer { movie ->
             run {
                 if (movie != null) {
                     initRecyclerView(movie)
@@ -133,9 +125,9 @@ class MoviesFragment : DaggerFragment() {
         movies_list.adapter = adapter
         adapter.onItemClick = { movie ->
             run {
-                val intent = Intent(activity!!, MovieDetailsActivity::class.java)
+                val intent = Intent(requireActivity(), MovieDetailsActivity::class.java)
                 intent.putExtra("movie", movie)
-                activity!!.startActivity(intent)
+                requireActivity().startActivity(intent)
             }
 
         }

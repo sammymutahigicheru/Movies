@@ -3,6 +3,7 @@ plugins{
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 android {
     flavorDimensions ("environment")
@@ -51,6 +52,12 @@ dependencies {
 
 
     implementation ("org.koin:koin-android:2.0.0-GA4")
+
+    /*
+    * Hilt
+    * */
+    implementation ("com.google.dagger:hilt-android:2.28-alpha")
+    kapt ("com.google.dagger:hilt-android-compiler:2.28-alpha")
 
 
 

@@ -1,5 +1,6 @@
 package com.sammy.movies.ui
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,7 @@ import com.sammy.datasource.datasource.ReviewDatasource
 import com.sammy.datasource.datasource.TrailerDatasource
 import javax.inject.Inject
 
-class MoviesViewModel @Inject constructor(
+class MoviesViewModel @ViewModelInject constructor(
     val dataSource: MovieDataSource
 ) : ViewModel() {
 
@@ -31,7 +32,6 @@ class MoviesViewModel @Inject constructor(
         })
 
     }
-
 
 
 }

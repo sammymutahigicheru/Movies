@@ -3,6 +3,7 @@ plugins{
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -33,6 +34,12 @@ dependencies {
     api ("com.squareup.retrofit2:converter-gson:2.5.0")
     api ("com.squareup.okhttp3:okhttp:4.8.1")
     api ("com.squareup.okhttp3:logging-interceptor:4.8.1")
+
+    /*
+    * Hilt
+    * */
+    implementation ("com.google.dagger:hilt-android:2.28-alpha")
+    kapt ("com.google.dagger:hilt-android-compiler:2.28-alpha")
 
 
     // dagger

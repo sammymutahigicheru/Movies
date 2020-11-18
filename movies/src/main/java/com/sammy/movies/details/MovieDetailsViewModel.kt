@@ -1,5 +1,6 @@
 package com.sammy.movies.details
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +13,7 @@ import com.sammy.datasource.datasource.ReviewDatasource
 import com.sammy.datasource.datasource.TrailerDatasource
 import javax.inject.Inject
 
-class MovieDetailsViewModel @Inject constructor(
+class MovieDetailsViewModel @ViewModelInject constructor(
     val genreDataSource: GenreDataSource,
     val reviewDatasource: ReviewDatasource, val trailerDatasource: TrailerDatasource
 ):ViewModel() {
