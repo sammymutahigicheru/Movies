@@ -11,9 +11,13 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/*
+* Using an object rather than a class leads to less generated code
+* */
+
 @InstallIn(ApplicationComponent::class)
 @Module
-class NetworkModule {
+object NetworkModule {
     val httpLoggingInterceptor: HttpLoggingInterceptor
         @Provides
         get() {
