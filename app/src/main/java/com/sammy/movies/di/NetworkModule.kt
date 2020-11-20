@@ -1,4 +1,4 @@
-package com.sammy.datasource
+package com.sammy.movies.di
 
 import com.sammy.datasource.api.MoviesApi
 import com.sammy.datasource.utils.BASE_URL
