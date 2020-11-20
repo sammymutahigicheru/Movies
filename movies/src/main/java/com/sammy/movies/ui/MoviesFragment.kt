@@ -20,7 +20,6 @@ import com.sammy.movies.details.MovieDetailsActivity
 import com.sammy.movies.utils.POPULAR
 import com.sammy.movies.utils.TOP_RATED
 import com.sammy.movies.utils.UPCOMING
-import dagger.android.support.DaggerFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
@@ -32,6 +31,8 @@ class MoviesFragment : Fragment() {
     private var sortBy = POPULAR
     private var isFetchingMovies: Boolean = false
     private var currentPage = 1
+
+
 
 
     override fun onCreateView(
