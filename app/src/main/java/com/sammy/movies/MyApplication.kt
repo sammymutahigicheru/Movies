@@ -1,16 +1,25 @@
 package com.sammy.movies
 
 import android.app.Application
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
-import dagger.hilt.android.HiltAndroidApp
+import com.sammy.movies.di.*
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
-@HiltAndroidApp
 class MyApplication:Application(){
     override fun onCreate() {
         super.onCreate()
         //timber
         // stetho
         //crashanalyticstree
+        startKoin {
+            androidContext(this@MyApplication)
+            modules(
+                networkModule,
+                viewModelModule,
+                dataSourceModule,
+                networkClientModule,
+                persistModule
+            )
+        }
     }
 }
