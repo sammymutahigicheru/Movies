@@ -3,7 +3,6 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -60,11 +59,6 @@ dependencies {
 
     //Fragment ktx
     implementation ("androidx.fragment:fragment-ktx:1.2.5")
-    /*
-    * Hilt viewmodels
-    * */
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02")
-    kapt("androidx.hilt:hilt-compiler:1.0.0-alpha02")
 
     //picasso
     implementation("com.squareup.picasso:picasso:2.71828")

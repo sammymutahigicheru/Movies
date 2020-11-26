@@ -3,7 +3,6 @@ plugins{
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
 }
 android {
     flavorDimensions ("environment")
@@ -54,20 +53,15 @@ dependencies {
     implementation ("org.koin:koin-android:2.0.0-GA4")
 
     /*
-    * Hilt
+    * Koin
     * */
-    implementation ("com.google.dagger:hilt-android:2.28-alpha")
-    kapt ("com.google.dagger:hilt-android-compiler:2.28-alpha")
+    // Koin for Kotlin
+    implementation ("org.koin:koin-core:2.2.1")
 
+// Koin Extended & experimental features
+    implementation ("org.koin:koin-core-ext:2.2.1")
 
-
-
-    // dagger
-    implementation ("com.google.dagger:dagger:2.22.1")
-    kapt ("com.google.dagger:dagger-compiler:2.22.1")
-    // dagger android
-    implementation ("com.google.dagger:dagger-android:2.22.1")
-    implementation ("com.google.dagger:dagger-android-support:2.22.1") // if you use the support libraries
-    kapt ("com.google.dagger:dagger-android-processor:2.22.1")
+// Koin for Unit tests
+    testImplementation ("org.koin:koin-test:2.2.1")
 
 }

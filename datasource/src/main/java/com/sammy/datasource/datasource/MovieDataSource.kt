@@ -16,11 +16,8 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class MovieDataSource @Inject constructor(
+class MovieDataSource(
     private val networkClient: NetworkClient<MoviesApi>,
     val moviePersist: MoviePersist
 ) {

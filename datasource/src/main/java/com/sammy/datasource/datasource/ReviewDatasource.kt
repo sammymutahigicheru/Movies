@@ -14,11 +14,8 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class ReviewDatasource @Inject constructor(
+class ReviewDatasource(
     private val networkClient: NetworkClient<MoviesApi>,
     val reviewPersist: ReviewPersist
 ) {
