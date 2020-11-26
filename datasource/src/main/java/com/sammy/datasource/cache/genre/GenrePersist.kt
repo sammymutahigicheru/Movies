@@ -5,9 +5,8 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.app.network.cache.CacheInterface
 import com.sammy.datasource.cache.MainDatabase
-import javax.inject.Inject
 
-class GenrePersist @Inject constructor(context: Context) :
+class GenrePersist(context: Context) :
     CacheInterface<GenreResponse> {
 
     private var genreDao: GenreDao = MainDatabase.getDatabase(context).genreDao()
