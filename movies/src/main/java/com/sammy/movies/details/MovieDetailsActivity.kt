@@ -27,7 +27,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_movie_details.*
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class MovieDetailsActivity : AppCompatActivity() {
 
     lateinit var movie:Movie

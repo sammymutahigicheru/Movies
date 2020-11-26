@@ -24,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class MoviesFragment : Fragment() {
     lateinit var adapter: MoviesRVAdapter
     private val moviesViewModel: MoviesViewModel by viewModels()
