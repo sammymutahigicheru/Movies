@@ -57,6 +57,8 @@ dependencies {
     * */
     // Koin for Kotlin
     implementation ("org.koin:koin-core:2.2.1")
+    //koin-viewmodel
+    implementation("org.koin:koin-androidx-viewmodel:2.2.1")
 
 // Koin Extended & experimental features
     implementation ("org.koin:koin-core-ext:2.2.1")
